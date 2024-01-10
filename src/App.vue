@@ -1,18 +1,41 @@
 <script>
-import AppMain from './components/AppMain.vue';
-import AppHeader from './components/AppHeader.vue';
+  import AppHeader from './components/AppHeader.vue';
+  import AppMain from './components/AppMain.vue';
+  import AppLoader from './components/AppLoader.vue';
+  import axios from 'axios';
+  import { store } from './store.js';
 
-export default{
-  components: {
-    AppHeader,
-    AppMain,
+  export default {
+    components: {
+      AppHeader,
+      AppMain,
+      AppLoader
+    },
+    data() {
+      return {
+        store
+      }
+    },
+    created() {
+      this.getCardList()
+    },
+    methods: {
+      getCardList() {
+        axios.get(store.endpoint).then((response) => {
+          store.cardList = response.data.data;
+          store.loading = false;
+        })
+      }
+    },
   }
-}
 </script>
 
 <template>
-  <AppHeader />
-  <AppMain />
+  <AppLoader v-if="store.loading"/>
+  <div v-else>
+    <AppHeader :title="store.app_title"/>
+    <AppMain />
+  </div>
 </template>
 
 <style lang="scss" scoped>

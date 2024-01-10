@@ -1,22 +1,11 @@
 <script>
-import axios, { Axios } from 'axios';
+ import axios from 'axios';
 import { store } from '../store.js';
 export default {
     name: 'AppCards',
     data() {
         return {
             store
-        }
-    },
-    created() {
-        this.getCardList()
-    },
-    methods: {
-        getCardList(){
-            axios.get(store.endpoint).then((response) => {
-                this.store.cardList = response.data.data
-                console.log(response.data.data);
-            })
         }
     },
 }

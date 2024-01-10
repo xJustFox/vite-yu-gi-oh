@@ -1,6 +1,9 @@
 <script>
 export default {
     name: 'AppHeader',
+    props:{
+        title: String,
+    }
 }
 </script>
 
@@ -8,7 +11,7 @@ export default {
     <header>
         <div class="container-fluid p-3">
             <img src="../assets/imgs/logo.png" alt="">
-            <h1 class="d-inline-block m-0 align-middle px-3">Yu-Gi-Oh API</h1>
+            <h1 class="d-inline-block m-0 align-middle px-3">{{title}}</h1>
         </div>
     </header>
 </template>

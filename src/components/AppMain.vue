@@ -13,6 +13,7 @@ export default {
     <main class="py-4">
         <div class="container test">
             <div class="my-row">
+
                 <div class="my-col-12 text-white mx-5">
                     <form class="row row-cols-lg-auto g-3 align-items-center ">
                         <div class="col-12">
@@ -31,10 +32,11 @@ export default {
                         </div>
                       
                         <div class="col-12">
-                          <button type="submit" class="btn btn-sm btn-primary">Search</button>
+                          <button class="btn btn-sm btn-primary">Search</button>
                         </div>
                     </form>
                 </div>
+
                 <AppCards />
             </div>
         </div>
