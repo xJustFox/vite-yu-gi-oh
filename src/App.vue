@@ -1,6 +1,7 @@
 <script>
   import AppHeader from './components/AppHeader.vue';
   import AppCards from './components/AppCards.vue';
+  import AppCardsSearch from './components/AppCardsSearch.vue';
   import AppSearch from './components/AppSearch.vue';
   import AppLoader from './components/AppLoader.vue';
   import axios from 'axios';
@@ -11,7 +12,8 @@
       AppHeader,
       AppLoader,
       AppSearch,
-      AppCards
+      AppCards,
+      AppCardsSearch
     },
     data() {
       return {
@@ -23,18 +25,7 @@
     },
     methods: {
       getCardList() {
-        let apiUrl = store.endpoint;
-
-        if (store.search != '') {
-          apiUrl += `&name=${store.search}`;
-        };
-
-        if (store.archetype != '') {
-          apiUrl += `&archetype=${store.archetype}`;
-        };
-
-        axios.get(apiUrl).then((response) => {
-          store.loading = true
+        axios.get(store.endpoint).then((response) => {
           store.cardList = response.data.data;
           store.loading = false;
         });
@@ -50,8 +41,9 @@
     <main class="py-4">
       <div class="container my-style-cont">
         <div class="my-row">
-          <AppSearch @button_search="getCardList()" @reset_search="getCardList()"/>
-          <AppCards v-for="(card, index) in store.cardList" :key="index" :card='card' />
+          <AppSearch @reset_search="getCardList()"/>
+          <AppCards v-if="store.flagSearch"/>
+          <AppCardsSearch v-else/>
         </div>
       </div>
 

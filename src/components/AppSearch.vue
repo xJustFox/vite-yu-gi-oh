@@ -1,21 +1,45 @@
 <script>
-import {store} from '../store.js';
+import { store } from '../store.js';
+import axios from 'axios';
 
 export default {
-    name: 'AppSearch',
-    data() {
-        return {
-            store,
+  name: 'AppSearch',
+  data() {
+    return {
+      store,
+    }
+  },
+  created() {
+    this.getArchetypeList()
+  },
+  methods: {
+    getArchetypeList() {
+      axios.get(store.apiArchetypes).then((response) => {
+        for (let i = 0; i < 100; i++) {
+          const element = response.data[i];
+          store.archetypeList.push(element.archetype_name)
         }
+      });
     },
-    methods: {
-        resetSearch(){
-            store.search = '';
-            store.archetype = '';
+    searchCard() {
+      store.searchCardList = [];
+      store.flagSearch = false;
+      if (!store.archetype == '') {
+        for (let i = 0; i < 100; i++) {
+          if (store.cardList[i].archetype == store.archetype) {
+            store.searchCardList.push(store.cardList[i]);
+          }
+        }
+      }
+    },
+    resetSearch() {
+      store.search = '';
+      store.archetype = '';
+      store.flagSearch = true;
 
-            this.$emit('reset_search');
-        }
+      this.$emit('reset_search');
     },
+  },
 }
 </script>
 <template lang="">
@@ -35,7 +59,7 @@ export default {
           </div>
 
           <div class="col-12">
-            <button class="btn btn-sm  btn-primary mr-15" @click="$emit('button_search')">Search</button>
+            <button class="btn btn-sm  btn-primary mr-15" @click="searchCard()">Search</button>
             <button class="btn btn-sm  btn-warning" @click="resetSearch">Reset</button>
           </div>
         </div>

@@ -1,7 +1,7 @@
 <script>
 import { store } from '../store.js';
 export default {
-    name: 'AppCards',
+    name: 'AppCardsSearch',
     data() {
         return {
             store
@@ -11,7 +11,7 @@ export default {
 </script>
 
 <template lang="">
-    <div class="my-col" v-for="(card, index) in store.cardList" :key="index">
+    <div class="my-col" v-for="(card, index) in store.searchCardList" :key="index">
         <div class="card text-white" style="background-color: #201f1f;">
             <img :src="card.card_images[0].image_url" class="card-img-top" :alt="card.name">
             <div class="card-body card-text-box">
