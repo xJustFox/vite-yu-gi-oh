@@ -27,7 +27,9 @@
       getCardList() {
         axios.get(store.endpoint).then((response) => {
           store.cardList = response.data.data;
-          store.loading = false;
+          setTimeout(() => {
+            store.loading = false;
+          }, 2000);
         });
       }
     },

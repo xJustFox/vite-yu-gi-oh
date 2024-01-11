@@ -18,16 +18,19 @@ export default {
   },
   methods: {
     getArchetypeList() {
-      axios.get(store.apiArchetypes).then((response) => {
-        for (let i = 0; i < 100; i++) {
-          const element = response.data[i];
-          store.archetypeList.push(element.archetype_name)
+      for (let i = 0; i < store.cardList.length; i++) {
+        const archetype = store.cardList[i].archetype;
+        if (typeof archetype === 'string') {
+          if (!store.archetypeList.includes(archetype)) {
+            store.archetypeList.push(archetype);
+          }
         }
-      });
+      }
     },
     searchCard() {
       store.searchCardList = [];
       store.flagSearch = false;
+      store.loading = true;
       if (!store.archetype == '') {
         for (let i = 0; i < store.cardList.length; i++) {
           if (store.cardList[i].archetype == store.archetype) {
@@ -35,6 +38,9 @@ export default {
           }
         }
       }
+      setTimeout(() => {
+        store.loading = false;
+      }, 500);
     },
     resetSearch() {
       store.archetype = '';
