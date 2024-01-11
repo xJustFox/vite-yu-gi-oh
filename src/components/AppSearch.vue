@@ -1,4 +1,5 @@
 <script>
+import AppTotCards from './AppTotCards.vue';
 import { store } from '../store.js';
 import axios from 'axios';
 
@@ -8,6 +9,9 @@ export default {
     return {
       store,
     }
+  },
+  components:{
+    AppTotCards,
   },
   created() {
     this.getArchetypeList()
@@ -25,7 +29,7 @@ export default {
       store.searchCardList = [];
       store.flagSearch = false;
       if (!store.archetype == '') {
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < store.cardList.length; i++) {
           if (store.cardList[i].archetype == store.archetype) {
             store.searchCardList.push(store.cardList[i]);
           }
@@ -33,7 +37,6 @@ export default {
       }
     },
     resetSearch() {
-      store.search = '';
       store.archetype = '';
       store.flagSearch = true;
 
@@ -45,11 +48,6 @@ export default {
 <template lang="">
     <div class="my-col-12 text-white mx-5">
         <div class="row row-cols-lg-auto justify-content-end  g-3 align-items-center">
-          <div class="col-12">
-            <div class="input-group input-group-sm">
-              <input type="text" class="form-control shadow-none " id="searchInput" placeholder="Card name" v-model="store.search">
-            </div>
-          </div>
 
           <div class="col-12">
             <select class="form-select form-select-sm cs-pointer shadow-none" id="type-cards" v-model="store.archetype">
@@ -63,7 +61,10 @@ export default {
             <button class="btn btn-sm  btn-warning" @click="resetSearch">Reset</button>
           </div>
         </div>
-      </div>
+    </div>
+    <div class="my-col-12 text-center ">
+      <AppTotCards />
+    </div>
 </template>
 <style lang="scss" scoped>
 

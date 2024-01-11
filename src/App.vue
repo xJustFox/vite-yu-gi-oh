@@ -56,6 +56,7 @@
   @use './style/partials/variables' as *;
 
   main {
+    min-height: calc(100vh - 102px);
     background-color: #201f1f;
 
     &:hover {
