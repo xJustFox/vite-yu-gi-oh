@@ -4,7 +4,7 @@ export default {
     name: 'AppCards',
     props:{
         card: Object,
-    }
+    },
 }
 </script>
 
