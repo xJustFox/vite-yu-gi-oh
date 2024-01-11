@@ -27,5 +27,9 @@ export default {
         img{
             height: 70px;
         }
+
+        &:hover{
+            cursor: default;
+        }
     }
 </style>

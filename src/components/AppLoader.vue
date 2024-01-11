@@ -17,14 +17,16 @@ export default {
             <div class="text">
                 {{store.app_title}}
             </div>
-            <div class="circle-loader"></div>
+            <div class="circle-loader my-3 "></div>
             <div class="text loading">Loading</div>
         </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
+@use '../style/partials/variables' as *;
     .loader {
+        cursor: default;
         position: fixed;
         top: 0;
         left: 0;
@@ -34,7 +36,9 @@ export default {
         flex-direction: column;
         width: 100%;
         height: 100%;
-        background-color: #201f1f;
+        background-color: $my-black;
+        background-image: url('../assets/imgs/pattern.png');
+
 
         .text {
             color: gray;
@@ -68,11 +72,11 @@ export default {
             }
 
             50% {
-                box-shadow: 10px 0 white, 20px 0 rgba(255, 255, 255, 0);
+                box-shadow: 10px 0 gray, 20px 0 rgba(255, 255, 255, 0);
             }
 
             100% {
-                box-shadow: 10px 0 white, 20px 0 white;
+                box-shadow: 10px 0 gray, 20px 0 gray;
             }
         }
 

@@ -1,21 +1,18 @@
 <script>
- import axios from 'axios';
 import { store } from '../store.js';
 export default {
     name: 'AppCards',
-    data() {
-        return {
-            store
-        }
-    },
+    props:{
+        card: Object,
+    }
 }
 </script>
 
 <template lang="">
-    <div class="my-col" v-for="(card, index) in store.cardList" :key="index">
+    <div class="my-col">
 
         <div class="card text-white" style="background-color: #201f1f;">
-            <img v-for="(img, index) in card.card_images" :key="index" :src="img.image_url" class="card-img-top" alt="...">
+            <img :src="card.card_images[0].image_url" class="card-img-top" :alt="card.name">
             <div class="card-body card-text-box">
                 
                 <div class="card-text fs-smaller fw-600 ">{{card.name}}</div>
@@ -25,7 +22,7 @@ export default {
                 </div>
 
             </div>
-          </div>
+        </div>
     </div>
 </template>
 
